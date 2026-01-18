@@ -1,116 +1,496 @@
-/****** General ***********/
-* {
-    font-family: 'Raleway', sans-serif;
-}
-
 :root {
-    --main-color: #0065FC;
-    --main-bg-color: #F2F2F2;
-    --filter-bg-color: #DEEBFF;
+  --blue: #0065fc;
+  --bg: #f2f2f2;
+  --hover-blue: #deebff;
 }
 
-.fa-solid, .fa-regular {
-    color: var(--main-color);
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", sans-serif;
 }
 
-body {
-    display: flex;
-    justify-content: center;
+img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
 }
 
+
+/* ================= LAYOUT ================= */
 .main-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ================= HEADER / NAV ================= */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+
+.logo {
+  max-width: 120px;
+}
+
+/* NAV */
+.nav {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  padding: 20px 0;
+}
+
+/* underline TOP (desktop + tablet) */
+@media (min-width: 721px) {
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--blue);
+    transition: width 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--blue);
+  }
+
+  .nav-link:hover::after {
     width: 100%;
-    padding: 0 50px;
-    box-sizing: border-box;
+  }
 }
 
-.section-title {
-    margin: 0;
-    font-size: 22px;
+/* ================= SEARCH ================= */
+.search-wrapper {
+  padding: 0 16px;
 }
 
-.card {
-    background-color: white;
-    border-radius: 20px;
-    padding: 5px;
-    filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.1));
+.search-bar {
+  display: flex;
+  max-width: 420px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid var(--bg);
+  margin: 20px 0;
 }
 
-.card img {
-    object-fit: cover;
+.location-icon {
+  background: var(--bg);
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
 }
 
-.card-title {
-    font-size: 16px;
+.search-bar input {
+  border: none;
+  padding: 14px;
+  flex: 1;
+  font-weight: bold;
 }
 
-.euro {
-    font-weight: 700;
+.search-btn button {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-.neutralStar {
-    color: var(--main-bg-color)
+/* ================= INFO ICON ================= */
+.info-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 16px;
 }
 
-/****** Accommodation And Popular ***********/
+.info-icon i {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #f2f2f2;
+  border-radius: 50%;
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+/* ================= FILTERS ================= */
+.filters {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 0 16px;
+  margin: 25px 0;
+}
+
+.filters p {
+  width: 100%;
+  font-weight: bold;
+}
+
+.filter {
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: 2px solid #f2f2f2;
+  background: white;
+  display: flex;
+  gap: 10px;
+  transition: background 0.2s ease;
+  font-weight: bold;
+}
+
+.filter:hover {
+  cursor: pointer;
+  background: var(--hover-blue);
+}
+
+/* ================= MAIN SECTIONS ================= */
+
+/* DESKTOP LAYOUT (Default):
+   Popular is to the RIGHT of Accommodation.
+   HTML Structure assumed: <Accommodation> then <Popular>
+*/
 .accommodation-and-popular {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 30px;
 }
 
-.accommodation-and-popular section {
-    background-color: var(--main-bg-color);
-    border-radius: 20px;
-    padding: 30px;
-    box-sizing: border-box;
+/* ================= ACCOMMODATION (Left Side) ================= */
+#accommodation {
+  background: var(--bg);
+  padding: 30px;
+  border-radius: 20px;
+  width: 65%; /* Takes up roughly 2/3rds */
 }
 
-/****** Accommodation ***********/
-.accommodation {
-    width: 65%;
+.first-roll,
+.second-roll {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 30px;
 }
 
-/****** Popular ***********/
+.hotel-card {
+  background: white;
+  border-radius: 20px;
+  padding: 5px; /* Creates the white border effect */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.hotel-card:hover {
+  transform: scale(1.02);
+}
+
+.hotel-image img {
+  height: 124px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  object-fit: cover;
+}
+
+.hotel-info {
+  padding: 10px;
+}
+.hotel-info h3 { margin-bottom: 5px; font-size: 16px; }
+.hotel-info p { font-size: 14px; margin-bottom: 5px; }
+
+.show-more {
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* ================= MOST POPULAR (Right Side) ================= */
 .popular {
-    width: 32%;
+  background: var(--bg);
+  border-radius: 20px;
+  padding: 30px;
+  width: 35%; /* Takes up roughly 1/3rd */
 }
 
 .popular-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.popular-cards .card {
-    display: flex;
-    margin-top: 33px;
+.popular-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
 }
 
-.popular-cards img {
+/* FIX FOR IMAGE CUTTING */
+.popular .card {
+  height: 146px;
+  display: flex;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 5px; /* White border effect */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  cursor: pointer;
+}
+
+.popular .card img {
+  /* Using min-width ensures it doesn't squash */
+  min-width: 33%;
+  width: 33%; 
+  height: 100%;
+  object-fit: cover; /* Keeps image proportional */
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.card-content {
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-content h3 { font-size: 16px; }
+.card-content p { font-size: 14px; }
+
+
+/* ================= ACTIVITIES ================= */
+#activities {
+  margin-top: 60px;
+  padding: 0 40px;
+  margin-bottom: 60px;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.activity-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  height: 440px; /* Fixed height for alignment */
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-image {
+  flex: 1; /* Takes remaining space */
+  overflow: hidden;
+}
+
+.activity-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.activity-card h3 {
+  padding: 15px;
+  height: 60px; /* Fixed height for text area */
+  display: flex;
+  align-items: center;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  background: var(--bg);
+  padding: 20px 0;
+}
+
+.contact-us-form {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.contact-us-form div {
     width: 33%;
-    height: 136px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
 }
+.contact-us-form h3 { margin-bottom: 15px; }
+.contact-us-form p { margin-bottom: 10px; cursor: pointer; }
 
-.popular-cards .card-content {
-    width: 67%;
-    padding-left: 15px;
+
+/* ================= TABLET VERSION ================= */
+/* From 1024px down to 721px */
+/* ================= TABLET VERSION (1024px to 721px) ================= */
+@media (max-width: 1024px) {
+
+  /* 1. Activities: 4 cards in a row, left to right */
+  .activities-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns from left to right */
+    gap: 20px; /* Reduced gap to fit tablet width */
+    margin-top: 20px;
+  }
+
+  .activity-card {
+    /* Set the specific height you requested */
+    height: 270px; 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-}
+  }
 
-.popular-cards .card-title {
-    margin-top: 10px;
-    margin-bottom: 4px;
-}
+  .activity-image {
+    height: 200px; /* Image takes most of the height */
+    width: 100%;
+  }
 
-.popular-cards .card-subtitle {
+  .activity-image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .activity-card h3 {
+    /* Text sits right below the image with no extra gap */
+    height: 70px; 
+    font-size: 14px; /* Slightly smaller text to fit horizontally */
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
     margin: 0;
-}
+  }
 
-.popular-cards .card-rating {
-    margin-bottom: 5px;
+  
+  .accommodation-and-popular {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  #accommodation, .popular {
+    width: 100%; 
+  }
+
+  .popular-cards {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .popular .card {
+    flex: 1; /* Make them equal width */
+    height: 146px;
+  }
+}
+/* ================= MOBILE VERSION ================= */
+/* 720px and below */
+@media (max-width: 720px) {
+  .main-container {
+    padding: 0;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .logo {
+      margin-top: 20px;
+  }
+
+  .nav {
+    width: 100%;
+  }
+
+  .nav-link {
+    width: 50%;
+    text-align: center;
+    border-bottom: 3px solid #f2f2f2;
+    padding-bottom: 15px;
+  }
+  
+  /* Active tab color override for mobile */
+  .nav-link:hover {
+      border-bottom-color: var(--blue);
+  }
+  
+  .nav-link::after { display: none; } /* Remove desktop underline */
+
+  .search-wrapper { padding: 0 20px; }
+  .search-bar { width: 100%; }
+  
+  /* 2. Popular goes ABOVE accommodation */
+  .accommodation-and-popular {
+    flex-direction: column-reverse; /* Reverses the order */
+    gap: 0;
+    margin-top: 0;
+  }
+
+  /* MOST POPULAR MOBILE STYLES */
+  .popular {
+    width: 100%;
+    border-radius: 0; /* Full width bg in mobile usually square */
+    padding: 30px 20px;
+  }
+  
+  .popular-cards {
+    flex-direction: column;
+  }
+
+  .popular .card {
+    width: 100%;
+    height: 144px;
+  }
+  
+  /* ACCOMMODATION MOBILE STYLES */
+  #accommodation {
+    background: white; /* Often white in mobile designs */
+    padding: 30px 20px;
+    border-radius: 0;
+  }
+
+  .first-roll,
+  .second-roll {
+    grid-template-columns: 1fr; /* Single column */
+  }
+
+  /* ACTIVITIES MOBILE */
+  #activities {
+    padding: 30px 20px;
+    margin: 0;
+  }
+
+  .activities-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .activity-card {
+      height: 200px;
+  }
+
+  .contact-us-form {
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px;
+  }
+  .contact-us-form div { width: 100%; }
 }
